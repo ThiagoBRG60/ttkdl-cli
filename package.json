@@ -1,0 +1,38 @@
+{
+  "name": "tiktok-dl",
+  "version": "1.0.0",
+  "description": "TikTok video downloader CLI. Download one or multiple TikTok videos directly from URLs with configurable save paths and concurrent downloads.",
+  "license": "MIT",
+  "type": "module",
+  "main": "src/index.js",
+  "author": "ThiagoBRG60",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "bin": {
+    "ttkdl": "src/index.js"
+  },
+  "scripts": {
+    "postinstall": "node ./src/scripts/postinstall.js"
+  },
+  "keywords": [
+    "cli",
+    "tiktok",
+    "downloader",
+    "video",
+    "scraper"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThiagoBRG60/tiktok-dl.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ThiagoBRG60/tiktok-dl/issues"
+  },
+  "homepage": "https://github.com/ThiagoBRG60/tiktok-dl#readme"
+}
