@@ -16,23 +16,23 @@ async function handleChangePathFlag({flagName, subcommand, value}) {
    const newPath = resolve(relative(process.cwd(), normalize(value.trim())))
    const checkAnswer = (search, text) => search === "yes" ? /^y(es)?$/i.test(text) : /^n(o)?$/i.test(text)
 
-   if (newPath.includes("tiktok-dl")) throw new Error(`The ${isRootFlag ? "new root" : "save path"} cannot be the current directory`)
+   if (newPath.includes("ttkdl-cli")) throw new Error(`The ${isRootFlag ? "new root" : "save path"} cannot be the current directory`)
    
    function changePath() {
       if (isRootFlag) {
          if (!existsSync(dirname(configFilePath))) mkdirSync(dirname(configFilePath))
-         writeFileSync(configFilePath, JSON.stringify({outputDir: join(newPath, "/tiktok-dl/videos")}))
+         writeFileSync(configFilePath, JSON.stringify({outputDir: join(newPath, "/ttkdl-cli/videos")}))
          return
       }
    
-      state.rootFolder = join(newPath, "/tiktok-dl/videos")
+      state.rootFolder = join(newPath, "/ttkdl-cli/videos")
    }
 
    if (state.confirmFlag && checkAnswer("yes", state.confirmFlag)) {
       changePath()
       process.stdout.write(AnsiColor.lightBlue("✓").gray(` ${isRootFlag ? "Default root" : "Save path"} changed successfully`).result())
    } else {
-      process.stdout.write(AnsiColor.lightBlue("?").gray(" Do you want to change the path to: ").red(`"${join(newPath, "/tiktok-dl/videos")}"`).gray("?").dim(" [y/n]\n").result())
+      process.stdout.write(AnsiColor.lightBlue("?").gray(" Do you want to change the path to: ").red(`"${join(newPath, "/ttkdl-cli/videos")}"`).gray("?").dim(" [y/n]\n").result())
 
       process.stdin.on("data", (data) => {
          const answer = data.toString().trim()

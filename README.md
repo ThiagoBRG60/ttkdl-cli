@@ -1,36 +1,36 @@
 <h1 align="center">
-   Tiktok-dl CLI
+   TTKDL-CLI
 </h1>
 
 <p align="center">
-   <img alt="Repository size" src="https://img.shields.io/github/repo-size/ThiagoBRG60/tiktok-dl?style=flat-square&color=FF005A"/>
-   <img alt="Npm version" src="https://img.shields.io/npm/v/tiktok-dl?style=flat-square&color=FF005A"/>
-   <a href="https://github.com/ThiagoBRG60/tiktok-dl/stargazers">
-      <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/ThiagoBRG60/tiktok-dl?style=flat-square&color=FF005A"/>
+   <img alt="Repository size" src="https://img.shields.io/github/repo-size/ThiagoBRG60/ttkdl-cli?style=flat-square&color=FF005A"/>
+   <img alt="Npm version" src="https://img.shields.io/npm/v/@thiagobrg60/ttkdl-cli?style=flat-square&color=FF005A"/>
+   <a href="https://github.com/ThiagoBRG60/ttkdl-cli/stargazers">
+      <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/ThiagoBRG60/ttkdl-cli?style=flat-square&color=FF005A"/>
    </a>
-   <a href="https://github.com/ThiagoBRG60/tiktok-dl/network/members">
-      <img alt="GitHub forks" src="https://img.shields.io/github/forks/ThiagoBRG60/tiktok-dl?style=flat-square&color=00FFFF"/>
+   <a href="https://github.com/ThiagoBRG60/ttkdl-cli/network/members">
+      <img alt="GitHub forks" src="https://img.shields.io/github/forks/ThiagoBRG60/ttkdl-cli?style=flat-square&color=00FFFF"/>
    </a>
-   <img alt="Npm downloads" src="https://img.shields.io/npm/dt/tiktok-dl?style=flat-square&color=00FFFF"/>
-   <a href="https://github.com/ThiagoBRG60/tiktok-dl/tree/main/LICENSE">
-      <img alt="License" src="https://img.shields.io/github/license/ThiagoBRG60/tiktok-dl?style=flat-square&color=00FFFF"/>
+   <img alt="Npm downloads" src="https://img.shields.io/npm/dt/@thiagobrg60/ttkdl-cli?style=flat-square&color=00FFFF"/>
+   <a href="https://github.com/ThiagoBRG60/ttkdl-cli/tree/main/LICENSE">
+      <img alt="License" src="https://img.shields.io/github/license/ThiagoBRG60/ttkdl-cli?style=flat-square&color=00FFFF"/>
    </a>
    <a href="https://nodejs.org/">
       <img alt="Node.js" src="https://img.shields.io/badge/Node.js-18%2B-blue?style=flat-square&color=00FFFF"/>
    </a>
 </p>
 
+
 ## 📝 Description
 
-Tiktok-dl is a lightweight command-line tool for downloading TikTok videos directly from one or more URLs. It lets you configure download paths, control concurrent download limits, and set persistent default folders for saving videos across sessions.
-
+TTKDL-CLI is a lightweight command-line tool for downloading TikTok videos directly from one or multiple URLs. It lets you configure download paths, control concurrent download limits, and set persistent default folders for saving videos across sessions.
 
 ## 🚀 Features
 
-- Download single or multiple TikTok videos from URLs.
-- Support for concurrent downloads (up to 5 videos at a time).
-- Custom output paths for single downloads or persistent default save folders.
-- Easy-to-use command-line interface.
+- Download one or multiple TikTok videos from URLs.
+- Concurrent downloads (up to 5 videos at a time).
+- Custom output paths or persistent default save folders.
+- Simple and intuitive command-line interface.
 
 ## 💻 Technologies
 
@@ -60,7 +60,7 @@ You can run the CLI either by installing it globally or using `npx`:
 ### Global Installation
 
 ```bash
-npm install -g tiktok-dl
+npm install -g @thiagobrg60/ttkdl-cli
 ```
 
 After installing, the `ttkdl` command will be available globally in your terminal.
@@ -68,7 +68,7 @@ After installing, the `ttkdl` command will be available globally in your termina
 ### Using npx (without installing)
 
 ```bash
-npx tiktok-dl "https://vt.tiktok.com/example"
+npx @thiagobrg60/ttkdl-cli "https://vt.tiktok.com/example"
 ```
 
 ## 📖 Usage
@@ -121,12 +121,12 @@ ttkdl config -r "C:/default/videos/folder"
 ttkdl <urls> [options]
 ```
 
-| Arguments / Options   | Description                                                         | Default             |
-|-----------------------|---------------------------------------------------------------------|---------------------|
-| `<urls>`              | One or more valid TikTok URLs (e.g., https://vt.tiktok.com/example) | —                   |
-| `-o, --output <path>` | Sets the save path for videos (one-time, optional)                  | User home directory |
-| `-m, --max <number>`  | Sets the number of videos to download simultaneously (max 5)        | 3                   |
-| `-h, --help`          | Shows the help message                                              | —                   |
+| Arguments / Options   | Description                                                            | Default                                                                                          |
+|-----------------------|------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| `<urls>`              | One or more valid TikTok URLs (e.g., https://vt.tiktok.com/example)    | —                                                                                                |
+| `-o, --output <path>` | Sets the save path for videos (one-time, optional)                     | <p>Windows: `C:/Users/<username>`<br>Linux: `/home/<username>`<br>macOS: `/Users/<username>`</p> |
+| `-m, --max <number>`  | Sets the number of videos to download simultaneously (max 5, optional) | 3                                                                                                |
+| `-h, --help`          | Shows the help message                                                 | —                                                                                                |
 
 ### Configuration Commands
 
@@ -134,9 +134,9 @@ ttkdl <urls> [options]
 ttkdl config [options]
 ```
 
-| Arguments / Options    | Description                                                     | Default             |
-|------------------------|---------------------------------------------------------------- |---------------------|
-| `-r, --root <path>`    | Sets the default folder where videos will be saved (persistent) | User home directory |
+| Arguments / Options    | Description                                                     | Default                                                                                          |
+|------------------------|---------------------------------------------------------------- |--------------------------------------------------------------------------------------------------|
+| `-r, --root <path>`    | Sets the default folder where videos will be saved (persistent) | <p>Windows: `C:/Users/<username>`<br>Linux: `/home/<username>`<br>macOS: `/Users/<username>`</p> |
 
 ## 🤝 Contributing
 
@@ -154,7 +154,7 @@ Contributions are welcome! To contribute to the project, follow these steps:
 
 <br/>
 
-💡 If you find a bug or have a feature request, please open an [`Issue`](https://github.com/ThiagoBRG60/tiktok-dl/issues) on GitHub.
+💡 If you find a bug or have a feature request, please open an [`Issue`](https://github.com/ThiagoBRG60/ttkdl-cli/issues) on GitHub.
 
 ## 📬 Contact
 

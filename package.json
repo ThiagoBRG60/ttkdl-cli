@@ -1,5 +1,5 @@
 {
-  "name": "tiktok-dl",
+  "name": "@thiagobrg60/ttkdl-cli",
   "version": "1.0.0",
   "description": "TikTok video downloader CLI. Download one or multiple TikTok videos directly from URLs with configurable save paths and concurrent downloads.",
   "license": "MIT",
@@ -22,6 +22,7 @@
   },
   "keywords": [
     "cli",
+    "cli-tool",
     "tiktok",
     "downloader",
     "video",
@@ -29,10 +30,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ThiagoBRG60/tiktok-dl.git"
+    "url": "git+https://github.com/ThiagoBRG60/ttkdl-cli.git"
   },
   "bugs": {
-    "url": "https://github.com/ThiagoBRG60/tiktok-dl/issues"
+    "url": "https://github.com/ThiagoBRG60/ttkdl-cli/issues"
   },
-  "homepage": "https://github.com/ThiagoBRG60/tiktok-dl#readme"
+  "homepage": "https://github.com/ThiagoBRG60/ttkdl-cli#readme"
 }
