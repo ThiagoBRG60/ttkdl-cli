@@ -11,7 +11,7 @@ async function handleChangePathFlag({flagName, subcommand, value}) {
 
    if (isRootFlag && !subcommand.includes("config")) throw new Error(`The "${flagName}" option requires the "config" subcommand`)
 
-   if (!value || !value.trim()) throw new Error(`The "${flagName}" option requires a valid path`)
+   if (!value || !value.trim() || !(/([a-z]:[/\\]|\.{1,2}[/\\])([a-z]+[._-]*[/\\]?)*/i.test(value.trim()))) throw new Error(`The "${flagName}" option requires a valid path`)
 
    const newPath = resolve(relative(process.cwd(), normalize(value.trim())))
    const checkAnswer = (search, text) => search === "yes" ? /^y(es)?$/i.test(text) : /^n(o)?$/i.test(text)
