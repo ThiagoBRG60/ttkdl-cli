@@ -1,1 +1,1 @@
-process.stdout.write(`\n\x1b[38;2;255;0;90mTiktok\x1b[0m\x1b[38;2;0;255;255m-dl\x1b[0m successfully installed!\n\x1b[2mRun "ttkdl -h" for usage information.\x1b[0m\n\n`)
+console.log(`\n\x1b[38;2;255;0;90mttkdl\x1b[0m\x1b[38;2;0;255;255m-cli\x1b[0m successfully installed!\n\x1b[2mRun "ttkdl -h" for usage information.\x1b[0m\n\n`)

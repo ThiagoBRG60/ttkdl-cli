@@ -9,7 +9,7 @@ function checkArgs({args}) {
          return acc
       }
 
-      if (cur.startsWith("https://vt.tiktok.com")) {
+      if (/^https:\/\/[a-z]{2,3}\.tiktok.com\/([a-z@/\d_=&?]+)$/i.test(cur)) {
          updateAccAndIndexes({acc: acc, accKey: "args", accValue: {...acc.args, urls: [...acc.args.urls, cur]}, indexesArr: verifiedIndexes, indexes: index})
          return acc
       }

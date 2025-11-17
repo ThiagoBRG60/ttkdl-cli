@@ -27,7 +27,7 @@ TTKDL-CLI is a lightweight command-line tool for downloading TikTok videos direc
 
 ## 🚀 Features
 
-- Download one or multiple TikTok videos from URLs.
+- Download one or multiple TikTok videos from URLs (any URL format, full or short).
 - Concurrent downloads (up to 5 videos at a time).
 - Custom output paths or persistent default save folders.
 - Simple and intuitive command-line interface.
@@ -68,7 +68,7 @@ After installing, the `ttkdl` command will be available globally in your termina
 ### Using npx (without installing)
 
 ```bash
-npx @thiagobrg60/ttkdl-cli "https://vt.tiktok.com/example"
+npx @thiagobrg60/ttkdl-cli "https://www.tiktok.com/@example/video/123456789"
 ```
 
 ## 📖 Usage
@@ -78,7 +78,11 @@ npx @thiagobrg60/ttkdl-cli "https://vt.tiktok.com/example"
 Download a single TikTok video:
 
 ```bash
-ttkdl "https://vt.tiktok.com/example"
+# Single download with full URL
+ttkdl "https://www.tiktok.com/@example/video/123456789"
+
+# Single download with short URL
+ttkdl "https://vm.tiktok.com/example"
 ```
 
 ### Multiple Downloads
@@ -86,7 +90,8 @@ ttkdl "https://vt.tiktok.com/example"
 Download multiple videos at once:
 
 ```bash
-ttkdl "https://vt.tiktok.com/example-1" "https://vt.tiktok.com/example-2"
+# Multiple downloads with mixed URLs
+ttkdl "https://www.tiktok.com/@example/video/123456789" "https://vt.tiktok.com/example-2" "https://vm.tiktok.com/example-3"
 ```
 
 ### Custom Output Path
@@ -94,7 +99,7 @@ ttkdl "https://vt.tiktok.com/example-1" "https://vt.tiktok.com/example-2"
 Specify a custom save location for a single download session:
 
 ```bash
-ttkdl "https://vt.tiktok.com/example-1" "https://vt.tiktok.com/example-2" -o "./my/folder"
+ttkdl "https://vt.tiktok.com/example" -o "./my/folder"
 ```
 
 ### Maximum Concurrent Downloads
@@ -102,7 +107,7 @@ ttkdl "https://vt.tiktok.com/example-1" "https://vt.tiktok.com/example-2" -o "./
 Set the number of videos to download simultaneously (max: 5):
 
 ```bash
-ttkdl "https://vt.tiktok.com/example-1" "https://vt.tiktok.com/example-2" -m 5
+ttkdl "https://vm.tiktok.com/example-1" "https://vt.tiktok.com/example-2" -m 5
 ```
 
 ### Default Save Location
@@ -115,9 +120,20 @@ ttkdl config -r "C:/default/videos/folder"
 
 ## 🎯 Command Reference
 
+### Global Commands
+
+```bash
+ttkdl [options]
+```
+
+| Arguments / Options | Description                   |
+|---------------------|-------------------------------|
+| `-h, --help`        | Shows the help message        |
+| `-v, --version`     | Shows the current CLI version |
+
 ### Download Commands
 
-```
+```bash
 ttkdl <urls> [options]
 ```
 
@@ -126,11 +142,10 @@ ttkdl <urls> [options]
 | `<urls>`              | One or more valid TikTok URLs (e.g., https://vt.tiktok.com/example)    | —                                                                                                |
 | `-o, --output <path>` | Sets the save path for videos (one-time, optional)                     | <p>Windows: `C:/Users/<username>`<br>Linux: `/home/<username>`<br>macOS: `/Users/<username>`</p> |
 | `-m, --max <number>`  | Sets the number of videos to download simultaneously (max 5, optional) | 3                                                                                                |
-| `-h, --help`          | Shows the help message                                                 | —                                                                                                |
 
 ### Configuration Commands
 
-```
+```bash
 ttkdl config [options]
 ```
 

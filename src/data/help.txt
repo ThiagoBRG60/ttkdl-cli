@@ -1,13 +1,16 @@
 Usage: ttkdl <command> [options]
 
 Commands:
- <urls>                 One or more valid TikTok URLs (e.g. https://vt.tiktok.com/example)
+ <urls>                 One or more valid TikTok URLs (any URL format, full or short)
  config                 Configures global options
+
+Global options:
+ -h or --help           Shows this help message
+ -v or --version        Shows the current CLI version
 
 Download options:
  -o or --output <path>  Sets the save path for videos (one run only, optional)
  -m or --max <number>   Sets the number of videos to download simultaneously (optional, default: 3, max: 5)
- -h or --help           Shows this help message
 
 Configuration options:
  -r or --root <path>    Sets the default folder where videos will be saved (persistent setting)
@@ -16,6 +19,6 @@ Current default save location:
  {root}
 
 Examples:
- > ttkdl "https://vt.tiktok.com/example" -o "./my/folder"
- > ttkdl "https://vt.tiktok.com/example-1" "https://vt.tiktok.com/example-2" -o "C:/my/folder" -m 5
+ > ttkdl "https://www.tiktok.com/@example/video/123456789" -o "./my/folder"
+ > ttkdl "https://vt.tiktok.com/example-1" "https://vm.tiktok.com/example-2" -o "C:/my/folder" -m 5
  > ttkdl config -r "C:/default/videos/folder"

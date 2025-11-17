@@ -32,7 +32,7 @@ async function handleChangePathFlag({flagName, subcommand, value}) {
       changePath()
       process.stdout.write(AnsiColor.lightBlue("✓").gray(` ${isRootFlag ? "Default root" : "Save path"} changed successfully`).result())
    } else {
-      process.stdout.write(AnsiColor.lightBlue("?").gray(" Do you want to change the path to: ").red(`"${join(newPath, "/ttkdl-cli/videos")}"`).gray("?").dim(" [y/n]\n").result())
+      process.stdout.write(AnsiColor.lightBlue("?").gray(" Do you want to change the path to: ").red(`"${join(newPath, "/ttkdl-cli/videos")}"`).gray("?").dim(" [y/n]\n").gray().result())
 
       process.stdin.on("data", (data) => {
          const answer = data.toString().trim()

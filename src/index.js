@@ -18,5 +18,5 @@ try {
    
    downloadVideos({urls})
 } catch (error) {
-   process.stdout.write(AnsiColor.bold("Error: ").red().gray(`${error.message}\n`).dim(`Run "ttkdl -h" for more information\n`).result())
+   process.stdout.write(AnsiColor.bold("Error: ").red().gray(`${error.message}\n`).dim(`Run "ttkdl -h" for more information`).gray().result())
 }

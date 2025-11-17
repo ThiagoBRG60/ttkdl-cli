@@ -35,7 +35,7 @@ async function downloadVideos({urls}) {
 
             const videosResponses = await Promise.allSettled(URLsResponses.map(url => url.status === "fulfilled" && fetch(url.value.no_wm)))
             videosSize.total += videosResponses.reduce((acc, cur) => cur.value ? acc += parseInt(cur.value.headers.get("content-length")) : acc, 0)
-            showStatus({status: AnsiColor.lightBlue("⬇").gray(" Downloading videos... ").dim(`(${downloadInfo.current}/${urls.length})\n`).result()})
+            showStatus({status: AnsiColor.lightBlue("⬇").gray(" Downloading videos... ").dim(`(${downloadInfo.current}/${urls.length})\n`).gray().result()})
 
             for (const video of videosResponses) {
                if (video.value) {
