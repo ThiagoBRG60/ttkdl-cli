@@ -4,6 +4,7 @@ import { executeFlags } from "./helpers/executeFlags.js"
 import { checkSubcommands } from "./helpers/checkSubcommands.js"
 import { downloadVideos } from "./helpers/downloadVideos.js"
 import { AnsiColor } from "./utils/ansiColor.js"
+import { notifyUpdate } from "./helpers/notifyUpdate.js"
 
 const argv = checkArgs({args: process.argv})
 
@@ -16,7 +17,8 @@ try {
    if (unknown.length > 0) throw new Error(`Unknown commands: ${unknown.map(item => `"${item}"`).join(", ")}`)
    if (urls.length === 0) throw new Error("No video URLs provided")
    
-   downloadVideos({urls})
+   await downloadVideos({urls})
+   notifyUpdate()
 } catch (error) {
    process.stdout.write(AnsiColor.bold("Error: ").red().gray(`${error.message}\n`).dim(`Run "ttkdl -h" for more information`).gray().result())
 }

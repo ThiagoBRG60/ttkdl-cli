@@ -3,7 +3,14 @@
 All notable changes to `ttkdl-cli` will be documented in this file.  
 This file is intended to help users and contributors quickly understand what has been added, changed, or fixed in each release.
 
-## [1.0.1] - 2025-11-16 (Current)
+## [1.1.0] - 2025-11-17 (Current)
+
+### Added
+- Support for usernames with punctuation in TikTok URLs.
+- Stronger validation for video save paths, to prevent invalid paths.
+- Automatic CLI version check and update notification.
+
+## [1.0.1] - 2025-11-16
 
 ### Added
 - New global flag `-v / --version` to display the current CLI version.
