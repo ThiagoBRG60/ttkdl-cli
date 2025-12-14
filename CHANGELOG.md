@@ -3,7 +3,17 @@
 All notable changes to `ttkdl-cli` will be documented in this file.  
 This file is intended to help users and contributors quickly understand what has been added, changed, or fixed in each release.
 
-## [1.1.0] - 2025-11-17 (Current)
+## [1.1.1] - 2025-12-13 (Current)
+
+### Changed
+- Improved video download logic and progress reporting:
+  - Download speed is now calculated using per-second chunk byte lengths with a moving average for higher accuracy.
+  - Progress output now falls back to a text-based mode when `Content-Length` is unavailable, displaying current downloaded size and real-time speed.
+
+### Fixed
+- Fixed download cancellation logic to only abort when the number of errors equals the total number of URLs being processed, instead of the number of simultaneous downloads.
+
+## [1.1.0] - 2025-11-17
 
 ### Added
 - Support for usernames with punctuation in TikTok URLs.

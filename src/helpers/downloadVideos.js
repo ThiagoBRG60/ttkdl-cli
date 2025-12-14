@@ -14,7 +14,8 @@ const sleepFn = sleep()
 async function downloadVideos({urls}) {
    try {
       let sliceIndexes = {start: 0, end: state.concurrentDownloads}
-      let videosSize = {total: 0, current: 0}
+      let videosSizes = {total: 0, current: 0}
+      let downloadSpeed = {prev: 0, cur: 0}
       let downloadInfo = {finished: 0, current: 0, errors: []}
       const startTime = Date.now()
       const fetchingMessage = showSpinner()
@@ -26,16 +27,35 @@ async function downloadVideos({urls}) {
          downloadInfo.current += slicedURLs.length
          
          fetchingMessage.start({label: "Fetching URLs...", current: downloadInfo.current, total: urls.length})
-         const URLsResponses = await Promise.allSettled(slicedURLs.map(url => getVideoURLs({url})))
-         URLsResponses.forEach((url, index) => {if (url.status === "rejected") downloadInfo.errors.push({url: slicedURLs[index], reason: "Invalid URL"})})
+         const URLsResponses = await Promise.allSettled(slicedURLs.map(url => getVideoURLs({url: url})))
+         
+         URLsResponses.forEach((url, index) => {
+            if (url.status === "rejected") downloadInfo.errors.push({url: slicedURLs[index], reason: "Invalid URL"})
+         })
+
          fetchingMessage.cancel()
 
-         if (slicedURLs.length !== downloadInfo.errors.length) {
+         if (downloadInfo.errors.length !== urls.length) {
             showStatus({status: AnsiColor.lightBlue("\n✓").gray(" URLs found.").result()})
 
-            const videosResponses = await Promise.allSettled(URLsResponses.map(url => url.status === "fulfilled" && fetch(url.value.no_wm)))
-            videosSize.total += videosResponses.reduce((acc, cur) => cur.value ? acc += parseInt(cur.value.headers.get("content-length")) : acc, 0)
+            const videosResponses = await Promise.allSettled(URLsResponses.filter(res => res.status === "fulfilled").map(url => fetch(url.value.no_wm)))
+            const hasContentLength = videosResponses.some(res => res.value.headers.get("content-length"))
+
+            if (hasContentLength) videosSizes.total += videosResponses.reduce((acc, cur) => acc += parseInt(cur.value.headers.get("content-length")), 0)
+
             showStatus({status: AnsiColor.lightBlue("⬇").gray(" Downloading videos... ").dim(`(${downloadInfo.current}/${urls.length})\n`).gray().result()})
+
+            const downloadSpeeds = []
+
+            const intervalId = setInterval(() => {
+               downloadSpeeds.push(downloadSpeed.cur)
+
+               if (downloadSpeeds.length > 3) downloadSpeeds.shift()
+
+               const average = downloadSpeeds.reduce((a, b) => a + b, 0) / downloadSpeeds.length
+               downloadSpeed.prev = average
+               downloadSpeed.cur = 0
+            }, 1000)
 
             for (const video of videosResponses) {
                if (video.value) {
@@ -44,10 +64,14 @@ async function downloadVideos({urls}) {
                   const readable = Readable.from(video.value.body)
                   const videoName = `tiktok_${crypto.randomUUID()}.mp4`
                   const writable = createWriteStream(join(state.rootFolder, videoName))
-   
+
                   readable.on("data", (chunk) => {
-                     videosSize.current += chunk.byteLength
-                     showProgress({percent: Math.floor((videosSize.current / videosSize.total) * 100), downloadSpeed: formatBytes(chunk.byteLength), remainingTime: formatTime(videosSize.total / videosSize.current)})
+                     const progressOptions = {videosSizes: videosSizes, downloadSpeed: formatBytes(downloadSpeed.prev)}
+
+                     videosSizes.current += chunk.byteLength
+                     downloadSpeed.cur += chunk.byteLength
+
+                     showProgress(hasContentLength ? {...progressOptions, style: "progressBar", remainingTime: formatTime(videosSizes.total / downloadSpeed.prev)} : {...progressOptions, style: "text"})
                      writable.write(chunk)
                   })
    
@@ -61,7 +85,10 @@ async function downloadVideos({urls}) {
                            process.stdout.clearScreenDown()
                         }
    
+                        clearInterval(intervalId)
                         downloadInfo.finished = 0
+                        if (!hasContentLength) videosSizes.total += videosSizes.current
+                        videosSizes.current = 0
                         sleepFn.cancel()
                      }
                   })
@@ -76,9 +103,10 @@ async function downloadVideos({urls}) {
       }
 
       const endTime = Date.now()
-      showStatus({status: `${urls.length !== downloadInfo.errors.length ? "\n" : ""}${AnsiColor.lightBlue("✓").gray(" Done.").result()}`})
+      showStatus({status: `${downloadInfo.errors.length !== urls.length ? "\n" : ""}${AnsiColor.lightBlue("✓").gray(" Done.").result()}`})
       drawLine()
-      showSummary({totalVideos: urls.length - downloadInfo.errors.length, errorsCount: downloadInfo.errors.length, totalSize: formatBytes(videosSize.total), time: formatTime((endTime - startTime) / 1000), path: state.rootFolder})
+      showSummary({totalVideos: urls.length - downloadInfo.errors.length, errorsCount: downloadInfo.errors.length, totalSize: formatBytes(videosSizes.total), time: formatTime((endTime - startTime) / 1000), path: state.rootFolder})
+
       if (downloadInfo.errors.length > 0) showErrors({errors: downloadInfo.errors})
    } catch (error) {
       throw new Error(`Failed to download videos: ${error.message}`)

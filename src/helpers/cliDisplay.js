@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs"
 import { join } from "node:path"
 import { AnsiColor } from "../utils/ansiColor.js"
 import packageJSON from "../../package.json" with {type: "json"}
+import { formatBytes } from "../utils/formatBytes.js"
 
 function showBanner() {
    const colors = {red: "\x1b[38;2;255;0;90m", lightBlue: "\x1b[38;2;0;255;255m", white: "\x1b[38;2;255;255;255m", reset: "\x1b[0m"}
@@ -42,12 +43,23 @@ function showSpinner() {
    return {start, cancel}
 }
 
-function showProgress({percent, downloadSpeed, remainingTime}) {
-   const barSize = {current: Math.floor(percent / 10), total: 10}
-   const progressBar = AnsiColor.red("[").lightBlue(`${"▓".repeat(barSize.current)}${"\x1b[38;2;255;0;90m-\x1b[0m".repeat(barSize.total - barSize.current)}`).red("]").lightBlue(` ${percent}% `).result().replaceAll("\n", "")
-   const downloadInfo = AnsiColor.dim(`(${downloadSpeed}/s | ~${remainingTime} remaining)`).gray().result().replaceAll("\n", "")
+function showProgress({style, videosSizes, downloadSpeed, remainingTime}) {
+   let downloadInfo
+   let progressMessage
 
-   process.stdout.write(percent !== 100 ? `\r\x1b[K${progressBar + downloadInfo}` : `\r\x1b[K${progressBar}`)
+   if (style === "progressBar") {
+      const downloadPercent = Math.floor((videosSizes.current / videosSizes.total) * 100)
+      const barSize = {current: Math.floor(downloadPercent / 10), total: 10}
+      const progressBar = AnsiColor.red("[").lightBlue(`${"▓".repeat(barSize.current)}${"\x1b[38;2;255;0;90m-\x1b[0m".repeat(barSize.total - barSize.current)}`).red("]").lightBlue(` ${downloadPercent}% `).result().replaceAll("\n", "")
+
+      downloadInfo = AnsiColor.dim(`(${downloadSpeed}/s | ~${remainingTime} remaining)`).gray().result().replaceAll("\n", "")
+      progressMessage = percent !== 100 ? `\r\x1b[K${progressBar + downloadInfo}` : `\r\x1b[K${progressBar}`
+   } else {
+      downloadInfo = AnsiColor.dim("Downloaded: ").red().dim(formatBytes(videosSizes.current)).lightBlue().dim(" | ").gray().dim("Speed: ").red().dim(`${downloadSpeed}/s`).lightBlue().result().replaceAll("\n", "")
+      progressMessage = `\r\x1b[K${downloadInfo}`
+   }
+
+   process.stdout.write(progressMessage)
 }
 
 function showSummary({totalVideos, errorsCount, totalSize, time, path}) {
