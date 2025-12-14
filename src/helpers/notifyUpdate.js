@@ -17,7 +17,7 @@ async function notifyUpdate() {
       if (npmCliVersion) {
          if (npmCliVersion !== currentVersion) {
             process.stdout.write(`${AnsiColor.white("─────────────────────────────────────────────").result().replaceAll("\n", "")}\n`)
-            process.stdout.write(`${AnsiColor.gray(`Update available: `).dim(npmCliVersion).gray(" → ").lightBlue(`${currentVersion}\n`).gray("Run").red(` "npm i -g @thiagobrg60/ttkdl-cli" `).gray("to update.").result()}\n`)
+            process.stdout.write(`${AnsiColor.gray(`Update available: `).dim(currentVersion).red().gray(" → ").lightBlue(`${npmCliVersion}\n`).gray("Run").red(` "npm i -g @thiagobrg60/ttkdl-cli" `).gray("to update.").result()}\n`)
          }
 
          writeCacheFile()

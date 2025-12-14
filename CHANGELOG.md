@@ -3,7 +3,15 @@
 All notable changes to `ttkdl-cli` will be documented in this file.  
 This file is intended to help users and contributors quickly understand what has been added, changed, or fixed in each release.
 
-## [1.1.1] - 2025-12-13 (Current)
+## [1.1.2] - 2025-12-13 (Current)
+
+### Fixed
+- Fixed version update notification showing versions in reversed order.
+
+### Changed
+- Improved version update notification style.
+
+## [1.1.1] - 2025-12-13
 
 ### Changed
 - Improved video download logic and progress reporting:
