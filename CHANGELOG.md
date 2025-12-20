@@ -3,7 +3,13 @@
 All notable changes to `ttkdl-cli` will be documented in this file.  
 This file is intended to help users and contributors quickly understand what has been added, changed, or fixed in each release.
 
-## [1.1.2] - 2025-12-13 (Current)
+## [1.1.3] - 2025-12-20 (Current)
+
+### Changed
+- Updated README:
+  - Added a disclaimer about educational purposes, usage responsibility, and compliance with platform policies.
+
+## [1.1.2] - 2025-12-13
 
 ### Fixed
 - Fixed version update notification showing versions in reversed order.

@@ -171,6 +171,18 @@ Contributions are welcome! To contribute to the project, follow these steps:
 
 💡 If you find a bug or have a feature request, please open an [`Issue`](https://github.com/ThiagoBRG60/ttkdl-cli/issues) on GitHub.
 
+## ⚠️ Disclaimer
+
+This is an open-source command-line tool developed for educational and technical demonstration purposes, focusing on web automation, CLI design, and media handling.
+
+**Important:**
+- The tool is intended to interact only with publicly accessible resources.
+- Any use must comply with the Terms of Service, copyright laws, and policies of the respective platforms.
+- It is not intended for large-scale, automated, or commercial redistribution of third-party content.
+- The author assumes no responsibility for misuse of this software.
+
+This project is not affiliated with, endorsed by, or supported by TikTok or any other platform.
+
 ## 📬 Contact
 
 If you have any questions, feel free to contact me via email:
