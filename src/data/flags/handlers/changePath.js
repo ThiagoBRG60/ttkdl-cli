@@ -20,7 +20,7 @@ async function handleChangePathFlag({flagName, subcommand, value}) {
    
    function changePath() {
       if (isRootFlag) {
-         if (!existsSync(dirname(configFilePath))) mkdirSync(dirname(configFilePath))
+         if (!existsSync(dirname(configFilePath))) mkdirSync(dirname(configFilePath), {recursive: true})
          writeFileSync(configFilePath, JSON.stringify({outputDir: join(newPath, "/ttkdl-cli/videos")}))
          return
       }

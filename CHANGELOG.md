@@ -3,7 +3,13 @@
 All notable changes to `ttkdl-cli` will be documented in this file.  
 This file is intended to help users and contributors quickly understand what has been added, changed, or fixed in each release.
 
-## [1.1.3] - 2025-12-20 (Current)
+## [1.1.4] - 2026-02-04 (Current)
+
+### Changed
+- Improved configuration persistence:
+  - The root directory selected by the user is now saved locally and reused across CLI updates.
+
+## [1.1.3] - 2025-12-20
 
 ### Changed
 - Updated README:
@@ -54,8 +60,6 @@ This file is intended to help users and contributors quickly understand what has
 - Updated some text colors to gray where it wasn't applied yet.
 - Updated `postinstall` script to use `console.log` instead of `process.stdout.write`.
 - Removed extra trailing spaces in terminal messages.
-
----
 
 ## [1.0.0] - 2025-11-14
 
