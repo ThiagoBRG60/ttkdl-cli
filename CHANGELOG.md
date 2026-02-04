@@ -3,7 +3,13 @@
 All notable changes to `ttkdl-cli` will be documented in this file.  
 This file is intended to help users and contributors quickly understand what has been added, changed, or fixed in each release.
 
-## [1.1.4] - 2026-02-04 (Current)
+## [1.1.5] - 2026-02-04 (Current)
+
+### Changed
+- Updated README:
+  - Added a usage example GIF.
+
+## [1.1.4] - 2026-02-04
 
 ### Changed
 - Improved configuration persistence:
